@@ -18,7 +18,7 @@ public class Artista {
     @Enumerated(EnumType.STRING)
     private TipoArtista tipoArtista;
 
-    @Transient
+    @OneToMany(mappedBy = "artista", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Musica> musicas = new ArrayList<>();
 
     public Artista(){}
@@ -37,6 +37,7 @@ public class Artista {
     }
 
     public void setMusicas(Musica musica) {
+        musica.setArtista(this);
         this.musicas.add(musica);
     }
 
